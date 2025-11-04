@@ -1,11 +1,16 @@
 import sys
 
+
 def create_file(path):
     file = open(path, "w")
-    file.write("|----------|--------|---------------------------------------------------------------------------|\n")
-    file.write("| PRIORITY | STATUS |                                   TASK                                    |\n")
-    file.write("|----------|--------|---------------------------------------------------------------------------|\n")
+    file.write(
+        "|----------|--------|---------------------------------------------------------------------------|\n")
+    file.write(
+        "| PRIORITY | STATUS |                                   TASK                                    |\n")
+    file.write(
+        "|----------|--------|---------------------------------------------------------------------------|\n")
     file.close()
+
 
 def check_if_file_exist(path):
     try:
@@ -15,6 +20,7 @@ def check_if_file_exist(path):
             file.close()
     except FileNotFoundError:
         print("\nYour TO DO LIST doesn't exist yet!\nDo you want to create it?")
+
         def type_choise():
             choise = input("\nType\nY if YES\nQ if NO\n")
             choise = choise.upper().strip()
@@ -26,15 +32,17 @@ def check_if_file_exist(path):
                 type_choise()
         type_choise()
 
+
 def take_file_name():
     filename = input("\nPlease enter your tasks file name .txt or .json\n")
     filename = filename.lower().strip()
-    if (filename.find(".txt", len(filename) - 4) == -1 or len(filename) <= 4 ) and (filename.find(".json", len(filename) - 5) == -1 or len(filename) <= 5):
+    if (filename.find(".txt", len(filename) - 4) == -1 or len(filename) <= 4) and (filename.find(".json", len(filename) - 5) == -1 or len(filename) <= 5):
         print("Extension should be .txt or .json! Try again!")
         filename = take_file_name()
     else:
         return filename
     return filename
+
 
 def print_tasks(path):
     file = open(path, "r")
@@ -43,10 +51,12 @@ def print_tasks(path):
     file.close()
     user_make_decision(path)
 
+
 def add_task(path):
     file = open(path, "a")
     priority = ""
     status = ""
+
     def choose_priority():
         nonlocal priority
         decision = input("\nChoose priority!\n1 : High\n2 : Midl\n3 : Low\n")
@@ -59,7 +69,8 @@ def add_task(path):
             priority = "LOW"
         else:
             choose_priority()
-    def choose_status():    
+
+    def choose_status():
         nonlocal status
         decision = input("\nChoose status!\n1 : Finished\n2 : In process\n")
         decision = decision.strip()
@@ -75,9 +86,11 @@ def add_task(path):
     while task == "":
         task = input("Please input task\n")
     file.write(f"|   {priority}    |  {status}   | {task.strip()}\n")
-    file.write("|----------|--------|---------------------------------------------------------------------------|\n")
+    file.write(
+        "|----------|--------|---------------------------------------------------------------------------|\n")
     file.close()
     user_make_decision(path)
+
 
 def find_task(path):
     text = input("Type keyword for search!\n")
@@ -94,8 +107,10 @@ def find_task(path):
     file.close()
     user_make_decision(path)
 
+
 def save_to_file(path):
-    decision = input("\n1 : Save to file\n2 : Save to another file .txt\n3 : Save to another file .json\n")
+    decision = input(
+        "\n1 : Save to file\n2 : Save to another file .txt\n3 : Save to another file .json\n")
     decision = decision.strip()
     if decision not in ["1", "2", "3"]:
         print("Please make correct choise!")
@@ -119,8 +134,10 @@ def save_to_file(path):
         save_to_file_format(path)
     sys.exit("\nFile saved! Bye!")
 
+
 def user_make_decision(path):
-    decision = input("\n1 : Add new task\n2 : View all tasks\n3 : Search for task by keyward\n4 : Save to file\n5 : Exit\n")
+    decision = input(
+        "\n1 : Add new task\n2 : View all tasks\n3 : Search for task by keyward\n4 : Save to file\n5 : Exit\n")
     decision = decision.strip()
     if decision not in ["1", "2", "3", "4", "5"]:
         print("Please make correct choise!")
@@ -136,7 +153,9 @@ def user_make_decision(path):
     elif decision == "5":
         sys.exit("\nBye Bye!")
 
-filename = take_file_name()
-path = "data/" + filename
-check_if_file_exist(path)
-user_make_decision(path)
+
+if __name__ == "__main__":
+    filename = take_file_name()
+    path = "data/" + filename
+    check_if_file_exist(path)
+    user_make_decision(path)
