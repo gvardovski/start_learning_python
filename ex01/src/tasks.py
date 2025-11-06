@@ -8,11 +8,12 @@ def find_task(content):
     print("|----------|--------|---------------------------------------------------------------------------|")
     print("| PRIORITY | STATUS |                                   TASK                                    |")
     print("|----------|--------|---------------------------------------------------------------------------|")
-    for note in content["NOTES"]:
-        if str(note["PRIORITY"]).find(text) != -1 or str(note["STATUS"]).find(text) != -1 or str(note["TASK"]).find(text) != -1:
-            print(
-                f"|   {note["PRIORITY"]}    |  {note["STATUS"]}   | {note["TASK"]}                           ")
-            print("|----------|--------|---------------------------------------------------------------------------|")
+    if content != {}:
+        for note in content["NOTES"]:
+            if str(note["PRIORITY"]).find(text) != -1 or str(note["STATUS"]).find(text) != -1 or str(note["TASK"]).find(text) != -1:
+                print(
+                    f"|   {note["PRIORITY"]}    |  {note["STATUS"]}   | {note["TASK"]}                           ")
+                print("|----------|--------|---------------------------------------------------------------------------|")
 
 
 def add_task(content):
@@ -47,6 +48,8 @@ def add_task(content):
     task = input("\nPlease input task\n")
     while task == "":
         task = input("Please input task\n")
+    if content == {}:
+        content["NOTES"] = []
     rez = list(content["NOTES"])
     rez.append({'PRIORITY': priority, 'STATUS': status, 'TASK': task})
     content["NOTES"] = rez
@@ -56,7 +59,8 @@ def print_tasks(content):
     print("|----------|--------|---------------------------------------------------------------------------|")
     print("| PRIORITY | STATUS |                                   TASK                                    |")
     print("|----------|--------|---------------------------------------------------------------------------|")
-    for note in content["NOTES"]:
-        print(
-            f"|   {note["PRIORITY"]}    |  {note["STATUS"]}   | {note["TASK"]}                           ")
-        print("|----------|--------|---------------------------------------------------------------------------|")
+    if content != {}:
+        for note in content["NOTES"]:
+            print(
+                f"|   {note["PRIORITY"]}    |  {note["STATUS"]}   | {note["TASK"]}                           ")
+            print("|----------|--------|---------------------------------------------------------------------------|")
